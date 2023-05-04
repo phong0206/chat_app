@@ -8,11 +8,15 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth, googleProvider, facebookProvider } from "../../config/firebase";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Register from "./Register";
+import { AuthContext } from "../../Context/AuthProvider";
+import { useAuthValue } from "./Context/AuthProvider";
 
-const Login = ({ handleRegister }) => {
+const Login = () => {
+  const navigate = useNavigate();
+  const context = useAuthValue();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -37,6 +41,10 @@ const Login = ({ handleRegister }) => {
     } catch (err) {
       console.log(err);
     }
+  };
+  const handleRegister = () => {
+    context.setIsRegister(false);
+    navigate("/register");
   };
 
   return (

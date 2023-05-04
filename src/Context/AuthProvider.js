@@ -1,21 +1,26 @@
 import React from "react";
-import { auth } from "../../src/config/firebase";
-import { useState, useEffect } from "react";
+import { auth } from "../config/firebase";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { createContext } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import "../App.css";
 import Login from "../Components/Login/Login";
 import Register from "../Components/Login/Register";
+
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-  const [user, setUser] = useState({});
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isRegister, setIsRegister] = useState(false);
-
-  const navigate = useNavigate();
-
+  const totalState = {
+    isLoading,
+    isRegister,
+    setIsRegister,
+    setIsLoading,
+  };
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -25,9 +30,8 @@ export default function AuthProvider({ children }) {
         navigate("/chatroom");
         return;
       }
-      setUser({});
+      setUser(null);
       setIsLoading(false);
-      
     });
 
     //clean function
@@ -36,40 +40,12 @@ export default function AuthProvider({ children }) {
     };
   }, []);
 
-  const handleRegister = () => {
-    setIsRegister(false);
-    navigate("/register");
-    console.log(isRegister);
-  };
-  const handleHaveAccount = () => {
-    setIsRegister(true);
-    navigate("/login");
-  };
-
-  // useEffect(() => {
-  //   if (!isRegister) {
-  //     return;
-  //   }
-  // }, [isRegister]);
-  // console.log(isRegister);
-
-  const Acc = React.memo(() => (
-    <>{isLoading ? <CircularProgress className="loading" /> : children}</>
-  ));
-
-  const LoginRegister = React.memo(() => (
-    <>
-      {isRegister ? (
-        <Login handleRegister={handleRegister} />
-      ) : (
-        <Register handleHaveAccount={handleHaveAccount} />
-      )}
-    </>
-  ));
-
   return (
-    <AuthContext.Provider value={{ user }}>
-      {user ? <Acc /> : <LoginRegister />}
+    <AuthContext.Provider value={totalState}>
+      {isLoading && children}
     </AuthContext.Provider>
   );
+}
+export function useAuthValue() {
+  return useContext(AuthContext);
 }

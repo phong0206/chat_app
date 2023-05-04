@@ -1,12 +1,24 @@
 import React from "react";
 import "../../App.css";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
+import { auth } from "../../config/firebase";
+import { useState, useContext } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthProvider";
+import { useAuthValue } from "./Context/AuthProvider";
 
-import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { auth, googleProvider, facebookProvider } from "../../config/firebase";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+const Register = () => {
+  const navigate = useNavigate();
+  const context = useAuthValue();
 
-const Register = ({ handleHaveAccount }) => {
+  const handleHaveAccount = () => {
+    context.setIsRegister(true);
+    navigate("/login");
+  };
+
   return (
     <div>
       <div className="login-box">
@@ -24,19 +36,19 @@ const Register = ({ handleHaveAccount }) => {
             <input type="password" required />
             <label>Confirm Password</label>
           </div>
-          <a onClick={handleHaveAccount}>
-            <span />
-            <span />
-            <span />
-            <span />
-            Have an account?
-          </a>
           <a>
             <span />
             <span />
             <span />
             <span />
             Register
+          </a>
+          <a onClick={handleHaveAccount}>
+            <span />
+            <span />
+            <span />
+            <span />
+            Have an account?
           </a>
         </form>
       </div>
