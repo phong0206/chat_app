@@ -36,7 +36,7 @@ export default function Sidebar() {
   const handleMouseMove = useCallback((e) => {
     const newWidth = e.clientX - document.body.offsetLeft;
     if (newWidth > minDrawerWidth && newWidth < maxDrawerWidth) {
-      setDrawerWidth(newWidth);
+      setDrawerWidth( newWidth);
     }
   }, []);
 
