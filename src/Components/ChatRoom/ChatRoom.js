@@ -1,6 +1,6 @@
-import React from 'react'
-import ChatWindow from './ChatWindow'
-import Sidebar from './Sidebar'
+import React from "react";
+import ChatWindow from "./ChatWindow";
+import Sidebar from "./Sidebar";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
@@ -12,15 +12,11 @@ const ChatRoom = () => {
           <Sidebar />
         </Grid>
         <Grid item xs={8}>
-          
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-            dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          
+          <ChatWindow />
         </Grid>
       </Grid>
     </Box>
-  ); 
-}
+  );
+};
 
-export default ChatRoom
+export default ChatRoom;

@@ -1,31 +1,43 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../../App.css";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import {
-  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   signInWithPopup,
-  signOut,
+  sendEmailVerification,
 } from "firebase/auth";
 import { auth, googleProvider, facebookProvider } from "../../config/firebase";
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import Register from "./Register";
-import { AuthContext } from "../../Context/AuthProvider";
-import { useAuthValue } from "./Context/AuthProvider";
-
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuthValue } from "../../Context/AuthProvider";
+import { Dialog } from "@mui/material";
 const Login = () => {
   const navigate = useNavigate();
-  const context = useAuthValue();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleSignIn = async () => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      console.log(err);
-    }
+  const { setTimeActive } = useAuthValue();
+  const [error, setError] = useState("");
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        if (!auth.currentUser.emailVerified) {
+          sendEmailVerification(auth.currentUser)
+            .then(() => {
+              setTimeActive(true);
+              navigate("/verify-email");
+            })
+            .catch((err) => alert(err.message));
+        } else {
+          navigate("/chatroom");
+        }
+      })
+      .catch((err) => {
+        setError(err.message);
+        alert(err.message);
+        
+      });
   };
 
   const handleSignInWithGG = async () => {
@@ -41,10 +53,6 @@ const Login = () => {
     } catch (err) {
       console.log(err);
     }
-  };
-  const handleRegister = () => {
-    context.setIsRegister(false);
-    navigate("/register");
   };
 
   return (
@@ -75,13 +83,14 @@ const Login = () => {
             <span />
             Submit
           </a>
-          &emsp; &emsp;
-          <a onClick={handleRegister}>
+          <a>
             <span />
             <span />
             <span />
             <span />
-            Register
+            <Link className="link" to="/register">
+              Create one here
+            </Link>
           </a>
           <br></br>
           <a onClick={handleSignInWithGG}>

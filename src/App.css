@@ -4,7 +4,9 @@
 .loading{
   margin-top: 45vh !important;
 }
-
+.link{
+  padding: 0px !important;
+}
 @media only screen and (max-width: 768px){
   .App{
     width: 100vw;
@@ -96,7 +98,7 @@ body {
   text-transform: uppercase;
   overflow: hidden;
   transition: .5s;
-  margin-top: 40px;
+  margin-top: 0px;
   letter-spacing: 4px;
   cursor: pointer;
 }
@@ -190,4 +192,28 @@ body {
     bottom: 100%;
   }
 }
+.verifyEmail {
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0px 0px 4px hsl(210, 12%, 75%);
+  text-align: center;
+  padding: 40px 20px;
+  background-color: hsl(210, 10%, 98%);
+margin-inline: auto;}
 
+.verifyEmail h1{
+  font-weight: 300;
+  margin-top: 0;
+}
+
+.verifyEmail > p{
+  line-height: 25px;
+}
+
+.verifyEmail > span{
+  color: gray;
+}
+
+.verifyEmail > button {
+  margin-top: 35px;
+}
