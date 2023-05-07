@@ -1,51 +1,50 @@
-import React, { useState, useCallback } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@mui/material/Drawer";
-export const defaultDrawerWidth = 140;
-const minDrawerWidth = 50;
-const maxDrawerWidth = 1000;
+import React from "react";
+import {
+  Drawer,
+  AppBar,
+  Toolbar,
+  List,
+  Typography,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  IconButton,
+  Divider,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
+import {
+  Menu as MenuIcon,
+  ChevronLeft as ChevronLeftIcon,
+} from "@mui/icons-material";
+import "../../App.css";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-const useStyles = makeStyles((theme) => ({
-  dragger: {
-    width: "5px",
-    backgroundColor: "#f4f7f9",
-    cursor: "ew-resize",
-    padding: "4px 0 0",
-    position: "absolute",
-    top: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 100,
-  },
-}));
-
-export default function Sidebar() {
-  const classes = useStyles();
-  const [drawerWidth, setDrawerWidth] = useState(defaultDrawerWidth);
-
-  const handleMouseDown = (e) => {
-    document.addEventListener("mouseup", handleMouseUp, true);
-    document.addEventListener("mousemove", handleMouseMove, true);
-  };
-
-  const handleMouseUp = () => {
-    document.removeEventListener("mouseup", handleMouseUp, true);
-    document.removeEventListener("mousemove", handleMouseMove, true);
-  };
-
-  const handleMouseMove = useCallback((e) => {
-    const newWidth = e.clientX - document.body.offsetLeft;
-    if (newWidth > minDrawerWidth && newWidth < maxDrawerWidth) {
-      setDrawerWidth( newWidth);
-    }
-  }, []);
-
+import { useState } from "react";
+const SideBar = ({ isCollapsed, toggleSidebar }) => {
   return (
-    <Drawer variant="permanent" PaperProps={{ style: { width: drawerWidth } }}>
-      <div
-        onMouseDown={(e) => handleMouseDown(e)}
-        className={classes.dragger}
-      />
-    </Drawer>
+    <div>
+      <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
+        <button className="toggle-btn" onClick={toggleSidebar}>
+          {isCollapsed ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+        </button>
+        <div className="content">
+          {" "}
+          <Divider />
+          <List>
+            <ListItem button>
+              <ListItemIcon>1</ListItemIcon>
+              <ListItemText primary="Item 1" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>2</ListItemIcon>
+              <ListItemText primary="Item 2" />
+            </ListItem>
+          </List>
+        </div>
+      </div>
+    </div>
   );
-}
+};
+
+export default SideBar;
