@@ -1,46 +1,30 @@
 import React from "react";
-import {
-  Drawer,
-  AppBar,
-  Toolbar,
-  List,
-  Typography,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  IconButton,
-  Divider,
-  useTheme,
-  useMediaQuery,
-} from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import UserInfo from "./UserInfo";
 import {
   Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
 } from "@mui/icons-material";
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import "../../App.css";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import RoomList from "./RoomList";
 import { useState } from "react";
 const SideBar = ({ isCollapsed, toggleSidebar }) => {
   return (
     <div>
       <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
         <button className="toggle-btn" onClick={toggleSidebar}>
-          {isCollapsed ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          {isCollapsed ? <DoubleArrowIcon /> : <KeyboardDoubleArrowLeftIcon />}
         </button>
         <div className="content">
-          {" "}
-          <Divider />
-          <List>
-            <ListItem button>
-              <ListItemIcon>1</ListItemIcon>
-              <ListItemText primary="Item 1" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>2</ListItemIcon>
-              <ListItemText primary="Item 2" />
-            </ListItem>
-          </List>
+          <div className="info-user">
+           <UserInfo/>
+          </div>
+
+          <div><RoomList/></div>
         </div>
       </div>
     </div>

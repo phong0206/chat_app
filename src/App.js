@@ -49,8 +49,6 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <h1 style={{ color: "white" }}>CHAT APP</h1>
-
       <Suspense fallback={<CircularProgress className="loading" />}>
         <AuthProvider value={{ currentUser }}>
           <Routes>
