@@ -18,7 +18,7 @@ export default function RoomList() {
     setOpen(!open);}
 
   return (
-    <div>
+    <div className="Collapse">
       <ListItemButton onClick={handleClick}>
         <ListItemIcon>
           <InboxIcon />

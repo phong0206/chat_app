@@ -23,6 +23,10 @@ font-weight: bold;
 }
 .sidebar.collapsed {
   background: linear-gradient(#141e30, #243b55);
+  width: 11.5vw !important;
+}
+.sidebar{
+  width: 65vw !important;
 }
 .toggle-btn {
   position: absolute;
@@ -30,7 +34,7 @@ font-weight: bold;
   right: 5px !important;
   width: 30px;
   height: 30px;
-background-color: transparent;
+  background-color: transparent;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -242,7 +246,7 @@ margin-inline: auto;}
   top: 0;
   bottom: 0;
   left: 0;
-  width: 22vw;
+  width: 16vw;
   overflow-x: hidden;
   transition: all 0.3s ease;
   border-width: 5px;
@@ -251,7 +255,8 @@ margin-inline: auto;}
 }
 
 .sidebar.collapsed {
-  width: 12vw;
+  width: 2.3vw;
+  background: linear-gradient(#141e30, #243b55);
 }
 
 .toggle-btn {
@@ -293,6 +298,18 @@ margin-inline: auto;}
   display: flex;
   flex-direction: row;
 }
-.btn-logout{
-  width: 25px;
+.btn-logout {
+  background: none;
+  border: none;
+  padding: 15px 15px;
+  border-radius: 10px;
+}
+
+.btn-logout:hover {
+  background: rgba(170, 170, 170, 0.062);
+  transition: 0.5s;
+}
+
+.btn-logout svg {
+  color: #fff;
 }
