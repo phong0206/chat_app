@@ -23,7 +23,7 @@ font-weight: bold;
 }
 .sidebar.collapsed {
   background: linear-gradient(#141e30, #243b55);
-  width: 11.5vw !important;
+  width: 41px !important;
 }
 .sidebar{
   width: 65vw !important;
@@ -222,8 +222,14 @@ body {
   text-align: center;
   padding: 40px 20px;
   background-color: hsl(210, 10%, 98%);
-margin-inline: auto;}
-
+margin-inline: auto;
+margin-top : 200px;
+}
+.btn-verify{
+  max-width: 200px;
+  padding: 10px;
+  margin-top: 10px;
+}
 .verifyEmail h1{
   font-weight: 300;
   margin-top: 0;
@@ -242,7 +248,7 @@ margin-inline: auto;}
 }
 
 .sidebar {
-  position: fixed;
+  position: fixed !important;
   top: 0;
   bottom: 0;
   left: 0;
@@ -252,12 +258,14 @@ margin-inline: auto;}
   border-width: 5px;
   color: #fff;
   background-color: teal;
+  z-index: 1;
 }
 
 .sidebar.collapsed {
-  width: 2.3vw;
+  width: 41px;
   background: linear-gradient(#141e30, #243b55);
 }
+
 
 .toggle-btn {
   position: absolute;
@@ -299,17 +307,42 @@ margin-inline: auto;}
   flex-direction: row;
 }
 .btn-logout {
-  background: none;
-  border: none;
-  padding: 15px 15px;
-  border-radius: 10px;
+  background: none !important;
+  border: none !important;
+  padding: 15px 15px !important;
+  border-radius: 10px !important;
 }
 
 .btn-logout:hover {
-  background: rgba(170, 170, 170, 0.062);
-  transition: 0.5s;
+  background: rgba(12, 1, 1, 0.441) !important;
+  transition: 0.5s !important;
 }
 
 .btn-logout svg {
-  color: #fff;
+  color: #fff !important;
+}
+.add-room{
+  padding: 15px 15px !important;
+  border-radius: 10px !important;
+  color: #fff !important;
+}
+.add-room:hover {
+  background: rgba(18, 3, 3, 0.456) !important;
+  transition: 0.5s !important;
+}
+.container-header {
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  width: 110%;
+  justify-content:space-between;
+  line-height: 5px;
+  
+  
+}
+.avatar-group{
+  margin-top: -45px;
+}
+.input-message{
+
 }

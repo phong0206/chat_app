@@ -1,25 +1,141 @@
-import React from 'react'
-import "../../App.css"
+import React from "react";
+import "../../App.css";
+import AvatarGroup from "@mui/material/AvatarGroup";
+import { Button } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import AddIcon from "@mui/icons-material/Add";
+import Message from "./Message";
+import styled from "styled-components";
+import Input from "@mui/material/Input";
+const MessageList = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  height: 84vh;
+  overflow-y: auto;
+`;
+
+function Header() {
+  return (
+    <div className="container-header">
+      <div>
+        <h2>Room 1</h2>
+        <span>Describle room 1</span>
+      </div>
+      <div>
+        <Button className="add-room">
+          {" "}
+          <AddIcon /> Invite{" "}
+        </Button>
+        <AvatarGroup
+          className="avatar-group"
+          total={10}
+          max={3}
+          sx={{ maxWidth: "0px" }}
+          spacing="small"
+        >
+          <Avatar
+            style={{ width: "30px", height: "30px" }}
+            sx={{ bgcolor: "green" }}
+          >
+            A
+          </Avatar>
+          <Avatar
+            style={{ width: "30px", height: "30px" }}
+            sx={{ bgcolor: "green" }}
+          >
+            G
+          </Avatar>
+          <Avatar
+            style={{ width: "30px", height: "30px" }}
+            sx={{ bgcolor: "green" }}
+          >
+            F
+          </Avatar>
+          <Avatar
+            style={{ width: "30px", height: "30px" }}
+            sx={{ bgcolor: "green" }}
+          >
+            G
+          </Avatar>
+        </AvatarGroup>
+      </div>
+    </div>
+  );
+}
+function FormMessage() {
+  return (
+    <div className="form-message">
+      <form>
+        <Input
+          bordered={false}
+          autoComplete="off"
+          className="input-message"
+          type="text"
+          placeholder="Enter message..."
+        />
+
+        <Button type="primary">Send</Button>
+      </form>
+    </div>
+  );
+}
+
 export default function ChatWindow() {
   return (
     <div>
-      các anh/chị cho em hỏi chút ạ em chỉ mới biết các thao tác cơ bản của html
-      và css thì có mẹo nào thiết kế được trang web theo mẫu figma ko ạ vì lần
-      đầu làm về cái này nên em chưa có nhiều kiến thức và deadline đến sát nên
-      em sợ không đủ thời gian để học kĩ về front-end ạ mong được các anh /chị
-      giải đáp ạcác anh/chị cho em hỏi chút ạ em chỉ mới biết các thao tác cơ
-      bản của html và css thì có mẹo nào thiết kế được trang web theo mẫu figma
-      ko ạ vì lần đầu làm về cái này nên em chưa có nhiều kiến thức và deadline
-      đến sát nên em sợ không đủ thời gian để học kĩ về front-end ạ mong được
-      các anh /chị giải đáp ạcác anh/chị cho em hỏi chút ạ em chỉ mới biết các
-      thao tác cơ bản của html và css thì có mẹo nào thiết kế được trang web
-      theo mẫu figma ko ạ vì lần đầu làm về cái này nên em chưa có nhiều kiến
-      thức và deadline đến sát nên em sợ không đủ thời gian để học kĩ về
-      front-end ạ mong được các anh /chị giải đáp ạcác anh/chị cho em hỏi chút ạ
-      em chỉ mới biết các thao tác cơ bản của html và css thì có mẹo nào thiết
-      kế được trang web theo mẫu figma ko ạ vì lần đầu làm về cái này nên em
-      chưa có nhiều kiến thức và deadline đến sát nên em sợ không đủ thời gian
-      để học kĩ về front-end ạ mong được các anh /chị giải đáp ạ
+      <Header />
+      <MessageList>
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
+
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
+      </MessageList>
+      <FormMessage />
     </div>
   );
 }

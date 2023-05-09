@@ -11,13 +11,13 @@ import { auth, googleProvider, facebookProvider } from "../../config/firebase";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthValue } from "../../Context/AuthProvider";
-import { Dialog } from "@mui/material";
-const Login = () => {
-  const navigate = useNavigate();
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setTimeActive } = useAuthValue();
   const [error, setError] = useState("");
+  const { setTimeActive } = useAuthValue();
+  const navigate = useNavigate();
+
   const handleSignIn = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
@@ -30,16 +30,11 @@ const Login = () => {
             })
             .catch((err) => alert(err.message));
         } else {
-          navigate("/chatroom");
+          navigate("/");
         }
       })
-      .catch((err) => {
-        setError(err.message);
-        alert(err.message);
-        
-      });
+      .catch((err) => setError(err.message));
   };
-
   const handleSignInWithGG = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
@@ -59,14 +54,26 @@ const Login = () => {
     <div>
       <div className="login-box">
         <h2>Login</h2>
+        {error && (
+          <div
+            style={{
+              color: "white",
+              fontSize: "18px",
+              background: "red",
+              padding: "5px",
+            }}
+          >
+            {error}
+          </div>
+        )}
         <form>
           <div className="user-box">
             <input
               type="text"
               required
-              onChange={(e) => setEmail(e.target.value + "@gmail.com")}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <label>Username</label>
+            <label>Email</label>
           </div>
           <div className="user-box">
             <input
@@ -103,6 +110,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Login;

@@ -1,9 +1,9 @@
+import "../../App.css";
 import { useAuthValue } from "../../Context/AuthProvider";
 import { useState, useEffect } from "react";
 import { auth } from "../../config/firebase";
 import { sendEmailVerification } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import "../../App.css"
 function VerifyEmail() {
   const { currentUser } = useAuthValue();
   const [time, setTime] = useState(60);
@@ -15,7 +15,7 @@ function VerifyEmail() {
       currentUser
         ?.reload()
         .then(() => {
-          if (currentUser) {
+          if (currentUser?.emailVerified) {
             clearInterval(interval);
             navigate("/chatroom");
           }
@@ -51,7 +51,7 @@ function VerifyEmail() {
   };
 
   return (
-    <div className="App">
+    <div className="center">
       <div className="verifyEmail">
         <h1>Verify your Email Address</h1>
         <p>
@@ -59,10 +59,12 @@ function VerifyEmail() {
           <br />
           <span>{currentUser?.email}</span>
         </p>
-        <span>Follow the instruction in the email to verify your account </span>
-        <button onClick={resendEmailVerification} disabled={timeActive}>
-          Resend Email {timeActive && time}
-        </button>
+        <span>Follow the instruction in the email to verify your account</span>
+        <div>
+          <button className="btn-verify" onClick={resendEmailVerification} disabled={timeActive}>
+            Resend Email {timeActive && time}
+          </button>
+        </div>
       </div>
     </div>
   );
