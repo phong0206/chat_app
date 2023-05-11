@@ -7,10 +7,17 @@ import {
   signInWithPopup,
   sendEmailVerification,
 } from "firebase/auth";
-import { auth, googleProvider, facebookProvider } from "../../config/firebase";
+import {
+  auth,
+  googleProvider,
+  facebookProvider,
+  db,
+} from "../../config/firebase";
 import { useState } from "react";
+import { collection, addDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthValue } from "../../Context/AuthProvider";
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,21 +37,15 @@ function Login() {
             })
             .catch((err) => alert(err.message));
         } else {
-          navigate("/");
+          navigate("/chatroom");
         }
       })
       .catch((err) => setError(err.message));
   };
-  const handleSignInWithGG = async () => {
+
+  const handleLogin = async (provider) => {
     try {
-      await signInWithPopup(auth, googleProvider);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const handleSignInWithFB = async () => {
-    try {
-      await signInWithPopup(auth, facebookProvider);
+      await signInWithPopup(auth, provider);
     } catch (err) {
       console.log(err);
     }
@@ -100,10 +101,10 @@ function Login() {
             </Link>
           </a>
           <br></br>
-          <a onClick={handleSignInWithGG}>
+          <a onClick={() => handleLogin(googleProvider)}>
             <GoogleIcon />
           </a>
-          <a onClick={handleSignInWithFB}>
+          <a onClick={() => handleLogin(facebookProvider)}>
             <FacebookIcon />
           </a>
         </form>

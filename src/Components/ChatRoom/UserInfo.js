@@ -14,8 +14,9 @@ import "../../App.css";
 import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 export default function UserInfo() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,6 +29,7 @@ export default function UserInfo() {
   const Logout = async () => {
     try {
       await signOut(auth);
+      navigate('/login')
     } catch (err) {
       console.log(err);
     }
@@ -46,7 +48,7 @@ export default function UserInfo() {
 
       <div>
         <Button variant="text" onClick={handleClickOpen} className="btn-logout">
-           <LogoutIcon />
+          <LogoutIcon />
         </Button>
         <Dialog
           open={open}
@@ -59,17 +61,16 @@ export default function UserInfo() {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Bạn có chắc chắn muốn logout khỏi hệ thống?
+              Are you sure you want to sign out?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
-              Hủy
+              Cancel
             </Button>
             <Button onClick={Logout} color="primary" autoFocus>
               <Link style={{ textDecoration: "none" }} to="/login">
-                
-                Đồng ý
+                Sign out
               </Link>
             </Button>
           </DialogActions>

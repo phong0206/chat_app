@@ -30,13 +30,14 @@ const LazyLoadingVerifyEmail = lazy(() =>
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [timeActive, setTimeActive] = useState(false);
-const navigate = useNavigate();
-   useEffect(() => {
-    navigate("/login")
-     onAuthStateChanged(auth, (user) => {
-       setCurrentUser(user);
-     });
-   }, []);
+  const navigate = useNavigate();
+  useEffect(() => {
+    
+    onAuthStateChanged(auth, (user) => {
+      currentUser ? navigate("/chatroom") : navigate("/login");
+      setCurrentUser(user);
+    });
+  }, []);
   return (
     <div className="App">
       <Suspense fallback={<CircularProgress className="loading" />}>

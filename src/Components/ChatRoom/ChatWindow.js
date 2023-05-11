@@ -10,8 +10,9 @@ import Input from "@mui/material/Input";
 const MessageList = styled.div`
   display: flex;
   flex-direction: column-reverse;
-  height: 84vh;
+  height: 82vh;
   overflow-y: auto;
+
 `;
 
 function Header() {
@@ -23,7 +24,7 @@ function Header() {
       </div>
       <div>
         <Button className="add-room">
-          {" "}
+          
           <AddIcon /> Invite{" "}
         </Button>
         <AvatarGroup
@@ -34,25 +35,25 @@ function Header() {
           spacing="small"
         >
           <Avatar
-            style={{ width: "30px", height: "30px" }}
+            
             sx={{ bgcolor: "green" }}
           >
             A
           </Avatar>
           <Avatar
-            style={{ width: "30px", height: "30px" }}
+            
             sx={{ bgcolor: "green" }}
           >
             G
           </Avatar>
           <Avatar
-            style={{ width: "30px", height: "30px" }}
+           
             sx={{ bgcolor: "green" }}
           >
             F
           </Avatar>
           <Avatar
-            style={{ width: "30px", height: "30px" }}
+            
             sx={{ bgcolor: "green" }}
           >
             G
@@ -74,7 +75,10 @@ function FormMessage() {
           placeholder="Enter message..."
         />
 
-        <Button type="primary">Send</Button>
+        <Button className="btn-message" type="primary">
+          {" "}
+          <stronge>Send</stronge>
+        </Button>
       </form>
     </div>
   );
@@ -84,7 +88,50 @@ export default function ChatWindow() {
   return (
     <div>
       <Header />
-      <MessageList>
+      <MessageList className="message-list">
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
+
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
+        <Message
+          text="phofdfsodfjs"
+          photoUrl="null"
+          displayName="phong"
+          createAt={1231231}
+        />
         <Message
           text="phofdfsodfjs"
           photoUrl="null"

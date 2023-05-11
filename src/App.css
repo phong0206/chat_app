@@ -26,7 +26,7 @@ font-weight: bold;
   width: 41px !important;
 }
 .sidebar{
-  width: 65vw !important;
+  width: 80vw !important;
 }
 .toggle-btn {
   position: absolute;
@@ -41,11 +41,19 @@ font-weight: bold;
   transition: all 0.3s ease;
   z-index: 999;
 }
-
-
-
+.input-message{
+ width: 50vw !important;
+ 
 }
-  
+.message-list{
+  height: 70vh !important;
+}
+}
+@media only screen and (min-width: 768px){
+  .toggle-btn{
+    display: none;
+  }
+}
 
 html {
   height: 100%;
@@ -259,11 +267,14 @@ margin-top : 200px;
   color: #fff;
   background-color: teal;
   z-index: 1;
+  height: 100vh !important;
 }
 
 .sidebar.collapsed {
   width: 41px;
   background: linear-gradient(#141e30, #243b55);
+  height: 100vh !important;
+
 }
 
 
@@ -288,7 +299,7 @@ margin-top : 200px;
 
 .chatwindow{
   color:hsl(210, 10%, 98%);
-  height: 101.8vh;
+  height: 100vh;
  background: linear-gradient(#141e30, #243b55);
 }
 .content{
@@ -322,7 +333,7 @@ margin-top : 200px;
   color: #fff !important;
 }
 .add-room{
-  padding: 15px 15px !important;
+  padding: 15px 10px !important;
   border-radius: 10px !important;
   color: #fff !important;
 }
@@ -344,5 +355,23 @@ margin-top : 200px;
   margin-top: -45px;
 }
 .input-message{
+  margin-top: 10px !important;
+ width: 65vw;
+ color:rgb(238, 243, 248) !important;
+ height: 36px !important;
+ font-size: 18px !important;
+margin-left: -2vw !important;
 
+}
+.btn-message{
+  background-color: #078990c9 !important;
+  border-radius: 10px !important;
+  font-weight: bold;
+  margin-left: 15px !important;
+  font-size: 14px !important;
+  color:#fff !important;
+}
+.btn-message:hover{
+    background-color: #08e6f2d0 !important;
+    
 }
