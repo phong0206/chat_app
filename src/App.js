@@ -28,55 +28,32 @@ const LazyLoadingVerifyEmail = lazy(() =>
 );
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [timeActive, setTimeActive] = useState(false);
-  const navigate = useNavigate();
-  useEffect(() => {
-    
-    onAuthStateChanged(auth, (user) => {
-      currentUser ? navigate("/chatroom") : navigate("/login");
-      setCurrentUser(user);
-    });
-  }, []);
   return (
     <div className="App">
-      <Suspense fallback={<CircularProgress className="loading" />}>
-        <AuthProvider value={{ currentUser, timeActive, setTimeActive }}>
-          <Routes>
-            <Route
-              exact
-              path="/chatroom"
-              element={
-                <ProtectedRoute>
-                  <LazyLoadingChatRoom />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                !currentUser?.emailVerified ? (
-                  <LazyLoadingLogin />
-                ) : (
-                  <Navigate to="/chatroom" replace />
-                )
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                !currentUser?.emailVerified ? (
-                  <LazyLoadingRegister />
-                ) : (
-                  <Navigate to="/chatroom" replace />
-                )
-              }
-            />
-            <Route path="/verify-email" element={<LazyLoadingVerifyEmail />} />
-            <Route path="*" element={<LazyLoadingNotFound />} />
-          </Routes>
-        </AuthProvider>
-      </Suspense>
+      
+        <Suspense fallback={<CircularProgress className="loading" />}>
+          <AuthProvider >
+            <Routes>
+              <Route
+                exact
+                path="/chatroom"
+                element={
+                  <ProtectedRoute>
+                    <LazyLoadingChatRoom />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/login" element={<LazyLoadingLogin />} />
+              <Route path="/register" element={<LazyLoadingRegister />} />
+              <Route
+                path="/verify-email"
+                element={<LazyLoadingVerifyEmail />}
+              />
+              <Route path="*" element={<LazyLoadingNotFound />} />
+            </Routes>
+          </AuthProvider>
+        </Suspense>
+     
     </div>
   );
 }

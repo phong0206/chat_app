@@ -7,7 +7,6 @@ import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import "../../App.css";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import RoomList from "./RoomList";
-import { useState } from "react";
 const SideBar = ({ isCollapsed, toggleSidebar }) => {
   return (
     <div>
@@ -28,3 +27,4 @@ const SideBar = ({ isCollapsed, toggleSidebar }) => {
 };
 
 export default SideBar;
+

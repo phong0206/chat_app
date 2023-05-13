@@ -12,7 +12,6 @@ const MessageList = styled.div`
   flex-direction: column-reverse;
   height: 82vh;
   overflow-y: auto;
-
 `;
 
 function Header() {
@@ -24,7 +23,6 @@ function Header() {
       </div>
       <div>
         <Button className="add-room">
-          
           <AddIcon /> Invite{" "}
         </Button>
         <AvatarGroup
@@ -34,30 +32,10 @@ function Header() {
           sx={{ maxWidth: "0px" }}
           spacing="small"
         >
-          <Avatar
-            
-            sx={{ bgcolor: "green" }}
-          >
-            A
-          </Avatar>
-          <Avatar
-            
-            sx={{ bgcolor: "green" }}
-          >
-            G
-          </Avatar>
-          <Avatar
-           
-            sx={{ bgcolor: "green" }}
-          >
-            F
-          </Avatar>
-          <Avatar
-            
-            sx={{ bgcolor: "green" }}
-          >
-            G
-          </Avatar>
+          <Avatar sx={{ width: 24, height: 24, bgcolor: "green" }}>A</Avatar>
+          <Avatar sx={{ width: 24, height: 24, bgcolor: "green" }}>G</Avatar>
+          <Avatar sx={{ width: 24, height: 24, bgcolor: "green" }}>F</Avatar>
+          <Avatar sx={{ width: 24, height: 24, bgcolor: "green" }}>G</Avatar>
         </AvatarGroup>
       </div>
     </div>

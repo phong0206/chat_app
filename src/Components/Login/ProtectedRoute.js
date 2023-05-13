@@ -5,8 +5,8 @@ import { useAuthValue } from "../../Context/AuthProvider";
 const ProtectedRoute = ({ children }) => {
   const { currentUser } = useAuthValue();
 
-  if (!currentUser) {
-    return <Navigate to="/chatroom" />;
+  if (!currentUser.emailVerified) {
+    return <Navigate to="/verify-email" />;
   }
 
   return children;
