@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
   const { currentUser } = useAuthValue();
 
   if (!currentUser?.emailVerified) {
-    return <Navigate to="/chatroom" />;
+    return <Navigate to="/verify-email" />;
   }
 
   return children;
