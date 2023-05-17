@@ -14,7 +14,9 @@ export default function AuthProvider({ children, value }) {
   useEffect(() => {
     const unsubscibed = onAuthStateChanged(auth, (user) => {
       if (user) {
-        navigate("./chatroom")
+        setCurrentUser(user);
+        navigate("/chatroom");
+        console.log(user)
         return;
       }
       navigate("/login");

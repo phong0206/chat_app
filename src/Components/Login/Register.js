@@ -26,14 +26,15 @@ const Register = () => {
     return isValid;
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
+    
     if (validatePassword()) {
       // Create a new user with email and password using firebase
-      createUserWithEmailAndPassword(auth, email, password)
+       await createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
-          sendEmailVerification(auth.currentUser)
+           sendEmailVerification(auth.currentUser)
             .then(() => {
               setTimeActive(true);
               navigate("/verify-email");
