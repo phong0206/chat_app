@@ -12,18 +12,19 @@ export default function AuthProvider({ children, value }) {
   const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
-    const unsubscibed = onAuthStateChanged(auth, (user) => {
+    const unsubscribed = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUser(user);
         navigate("/chatroom");
-        console.log(user)
+        console.log(user);
         return;
       }
-      navigate("/login");
+
       setCurrentUser(null);
+      navigate("/login");
     });
     return () => {
-      unsubscibed();
+      unsubscribed();
     };
   }, []);
   return (
