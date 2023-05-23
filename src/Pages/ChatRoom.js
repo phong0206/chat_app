@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import SideBar from "./Sidebar";
+import SideBar from "../Components/ChatRoom/Sidebar";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
-import ChatWindow from "./ChatWindow";
-import "../../App.css";
+import ChatWindow from "../Components/ChatRoom/ChatWindow";
+import "../App.css";
 const ChatRoom = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 

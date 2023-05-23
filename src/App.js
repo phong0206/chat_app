@@ -1,15 +1,12 @@
 import "./App.css";
-import AuthProvider from "./Context/AuthProvider";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Suspense, lazy } from "react";
 import ProtectedRoute from "./Components/Login/ProtectedRoute";
-
-const LazyLoadingLogin = lazy(() => import("./Components/Login/Login"));
-const LazyLoadingRegister = lazy(() => import("./Components/Login/Register"));
-const LazyLoadingChatRoom = lazy(() =>
-  import("./Components/ChatRoom/ChatRoom")
-);
+import PrivateRoute from "./Components/Login/PrivateRoute";
+const LazyLoadingLogin = lazy(() => import("./Pages/Login"));
+const LazyLoadingRegister = lazy(() => import("./Pages/Register"));
+const LazyLoadingChatRoom = lazy(() => import("./Pages/ChatRoom"));
 const LazyLoadingNotFound = lazy(() =>
   import("./Components/NotFound/NotFound")
 );
@@ -21,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <Suspense fallback={<CircularProgress className="loading" />}>
-        <AuthProvider>
+        <BrowserRouter>
           <Routes>
             <Route
               exact
@@ -37,7 +34,7 @@ function App() {
             <Route path="/verify-email" element={<LazyLoadingVerifyEmail />} />
             <Route path="*" element={<LazyLoadingNotFound />} />
           </Routes>
-        </AuthProvider>
+        </BrowserRouter>
       </Suspense>
     </div>
   );

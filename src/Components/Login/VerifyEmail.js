@@ -13,7 +13,7 @@ function VerifyEmail() {
   useEffect(() => {
     const interval = setInterval(() => {
       currentUser
-        ?.reload()
+        .reload()
         .then(() => {
           if (currentUser?.emailVerified) {
             clearInterval(interval);

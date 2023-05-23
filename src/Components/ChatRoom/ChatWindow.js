@@ -41,6 +41,10 @@ function Header() {
     </div>
   );
 }
+const handleSend = (e) => {
+   e.preventDefault();
+
+}
 function FormMessage() {
   return (
     <div className="form-message">
@@ -53,7 +57,7 @@ function FormMessage() {
           placeholder="Enter message..."
         />
 
-        <Button className="btn-message" type="primary">
+        <Button onClick={handleSend} className="btn-message" type="primary">
           {" "}
           <stronge>Send</stronge>
         </Button>

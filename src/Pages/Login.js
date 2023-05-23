@@ -1,5 +1,5 @@
 import React from "react";
-import "../../App.css";
+import "../App.css";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import {
@@ -7,17 +7,12 @@ import {
   signInWithPopup,
   sendEmailVerification,
 } from "firebase/auth";
-import {
-  auth,
-  googleProvider,
-  facebookProvider,
-  db,
-} from "../../config/firebase";
+import { auth, googleProvider, facebookProvider, db } from "../config/firebase";
 import { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuthValue } from "../../Context/AuthProvider";
-
+import { useAuthValue } from "../Context/AuthProvider";
+import { addDocument } from "../config/service";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,9 +20,9 @@ function Login() {
   const { setTimeActive } = useAuthValue();
   const navigate = useNavigate();
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
+     await signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         if (!auth.currentUser.emailVerified) {
           sendEmailVerification(auth.currentUser)
@@ -37,15 +32,52 @@ function Login() {
             })
             .catch((err) => alert(err.message));
         } else {
+          let isNewUser =
+            auth.currentUser.metadata.lastLoginAt ===
+            auth.currentUser.metadata.createdAt;
+          console.log(
+            auth.currentUser.metadata.lastLoginAt -
+              auth.currentUser.metadata.createdAt
+          );
+          if (isNewUser) {
+            addDocument("users", {
+              displayName: auth.currentUser.displayName,
+              email: auth.currentUser.email,
+              photoURL: auth.currentUser.photoURL,
+              uid: auth.currentUser.uid,
+              providerId: auth.currentUser.providerId,
+            });
+          }
+          console.log({
+            displayName: auth.currentUser.displayName,
+            email: auth.currentUser.email,
+            photoURL: auth.currentUser.photoURL,
+            uid: auth.currentUser.uid,
+            providerId: auth.currentUser.providerId,
+          });
+
           navigate("/chatroom");
         }
       })
-      .catch((err) => setError(err.message));
+      .catch((err) => console.log(err.message));
   };
 
   const handleLogin = async (provider) => {
     try {
-      await signInWithPopup(auth, provider);
+      const { user } = await signInWithPopup(auth, provider);
+      console.log(user);
+      let isNewUser = user.metadata.lastLoginAt === (user.metadata.createdAt);
+      console.log(user.metadata.lastLoginAt - user.metadata.createdAt);
+      if (isNewUser) {
+        addDocument("users", {
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          uid: user.uid,
+          providerId: user.reloadUserInfo.providerUserInfo[0].providerId,
+        });
+      }
+      navigate("/chatroom");
     } catch (err) {
       console.log(err);
     }
