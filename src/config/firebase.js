@@ -4,8 +4,9 @@ import {
   getAuth,
   GoogleAuthProvider,
   FacebookAuthProvider,
+  connectAuthEmulator,
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
@@ -24,5 +25,9 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 export const db = getFirestore(app);
+//Kết nối với Emulator của Firebase Authentication
+connectAuthEmulator(auth, "http://localhost:9099");
+// Kết nối với Emulator của Firestore
+connectFirestoreEmulator(db, "localhost", 8080);
 export const storage = getStorage(app);
 export const facebookProvider = new FacebookAuthProvider();

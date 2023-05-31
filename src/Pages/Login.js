@@ -12,7 +12,8 @@ import { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthValue } from "../Context/AuthProvider";
-import { addDocument } from "../config/service";
+import { addDocument, compareUid } from "../config/service";
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +23,7 @@ function Login() {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-     await signInWithEmailAndPassword(auth, email, password)
+    await signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         if (!auth.currentUser.emailVerified) {
           sendEmailVerification(auth.currentUser)
@@ -32,51 +33,22 @@ function Login() {
             })
             .catch((err) => alert(err.message));
         } else {
-          let isNewUser =
-            auth.currentUser.metadata.lastLoginAt ===
-            auth.currentUser.metadata.createdAt;
-          console.log(
-            auth.currentUser.metadata.lastLoginAt -
-              auth.currentUser.metadata.createdAt
-          );
-          if (isNewUser) {
-            addDocument("users", {
-              displayName: auth.currentUser.displayName,
-              email: auth.currentUser.email,
-              photoURL: auth.currentUser.photoURL,
-              uid: auth.currentUser.uid,
-              providerId: auth.currentUser.providerId,
-            });
-          }
-          console.log({
-            displayName: auth.currentUser.displayName,
-            email: auth.currentUser.email,
-            photoURL: auth.currentUser.photoURL,
-            uid: auth.currentUser.uid,
-            providerId: auth.currentUser.providerId,
-          });
+          const currentEmail = auth.currentUser.email;
+          console.log(auth.currentUser.email);
+          compareUid(currentEmail, auth.currentUser);
 
           navigate("/chatroom");
         }
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => setError(err.message));
   };
 
   const handleLogin = async (provider) => {
     try {
       const { user } = await signInWithPopup(auth, provider);
-      console.log(user);
-      let isNewUser = user.metadata.lastLoginAt === (user.metadata.createdAt);
-      console.log(user.metadata.lastLoginAt - user.metadata.createdAt);
-      if (isNewUser) {
-        addDocument("users", {
-          displayName: user.displayName,
-          email: user.email,
-          photoURL: user.photoURL,
-          uid: user.uid,
-          providerId: user.reloadUserInfo.providerUserInfo[0].providerId,
-        });
-      }
+      const currentEmail = await user.email;
+      console.log(currentEmail);
+      compareUid(currentEmail, user);
       navigate("/chatroom");
     } catch (err) {
       console.log(err);
@@ -94,6 +66,7 @@ function Login() {
               fontSize: "18px",
               background: "red",
               padding: "5px",
+              marginBottom: "12px",
             }}
           >
             {error}

@@ -4,15 +4,15 @@ import { useAuthValue } from "../../Context/AuthProvider";
 
 const ProtectedRoute = ({ children }) => {
   const { currentUser } = useAuthValue();
-if (!currentUser) {
-  return <Navigate to="/login" />;
-}
+  if (!currentUser) {
+    return <Navigate to="/login" />;
+  }
 
-if (!currentUser.emailVerified) {
-  return <Navigate to="/verify-email" />;
-}
+  if (!currentUser.emailVerified) {
+    return <Navigate to="/verify-email" />;
+  }
 
-return children;
-}
+  return children;
+};
 
 export default ProtectedRoute;

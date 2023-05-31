@@ -18,7 +18,6 @@ function App() {
   return (
     <div className="App">
       <Suspense fallback={<CircularProgress className="loading" />}>
-        <BrowserRouter>
           <Routes>
             <Route
               exact
@@ -34,7 +33,7 @@ function App() {
             <Route path="/verify-email" element={<LazyLoadingVerifyEmail />} />
             <Route path="*" element={<LazyLoadingNotFound />} />
           </Routes>
-        </BrowserRouter>
+        
       </Suspense>
     </div>
   );
